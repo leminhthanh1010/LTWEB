@@ -1,0 +1,12 @@
+E:\LTWeb\LTWProject\LTWEB\MyClass\bin\Debug\MyClass.dll.config
+E:\LTWeb\LTWProject\LTWEB\MyClass\bin\Debug\MyClass.dll
+E:\LTWeb\LTWProject\LTWEB\MyClass\bin\Debug\MyClass.pdb
+E:\LTWeb\LTWProject\LTWEB\MyClass\bin\Debug\EntityFramework.dll
+E:\LTWeb\LTWProject\LTWEB\MyClass\bin\Debug\EntityFramework.SqlServer.dll
+E:\LTWeb\LTWProject\LTWEB\MyClass\bin\Debug\EntityFramework.xml
+E:\LTWeb\LTWProject\LTWEB\MyClass\bin\Debug\EntityFramework.SqlServer.xml
+E:\LTWeb\LTWProject\LTWEB\MyClass\obj\Debug\MyClass.csproj.AssemblyReference.cache
+E:\LTWeb\LTWProject\LTWEB\MyClass\obj\Debug\MyClass.csproj.CoreCompileInputs.cache
+E:\LTWeb\LTWProject\LTWEB\MyClass\obj\Debug\MyClass.csproj.CopyComplete
+E:\LTWeb\LTWProject\LTWEB\MyClass\obj\Debug\MyClass.dll
+E:\LTWeb\LTWProject\LTWEB\MyClass\obj\Debug\MyClass.pdb

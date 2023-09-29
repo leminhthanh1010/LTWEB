@@ -156,3 +156,10 @@ E:\LTWeb\LTWProject\LTWEB\obj\Debug\LTWProject.csproj.CoreCompileInputs.cache
 E:\LTWeb\LTWProject\LTWEB\obj\Debug\LTWProject.csproj.CopyComplete
 E:\LTWeb\LTWProject\LTWEB\obj\Debug\LTWProject.dll
 E:\LTWeb\LTWProject\LTWEB\obj\Debug\LTWProject.pdb
+E:\LTWeb\LTWProject\LTWEB\bin\EntityFramework.dll
+E:\LTWeb\LTWProject\LTWEB\bin\EntityFramework.SqlServer.dll
+E:\LTWeb\LTWProject\LTWEB\bin\MyClass.dll
+E:\LTWeb\LTWProject\LTWEB\bin\MyClass.pdb
+E:\LTWeb\LTWProject\LTWEB\bin\MyClass.dll.config
+E:\LTWeb\LTWProject\LTWEB\bin\EntityFramework.xml
+E:\LTWeb\LTWProject\LTWEB\bin\EntityFramework.SqlServer.xml
