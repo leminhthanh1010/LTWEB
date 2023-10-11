@@ -17,5 +17,10 @@ namespace LTWProject
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        //Tao moi Sesson
+        protected void Session_Start()
+        {
+            Session["UserID"] = 1;
+        }
     }
 }

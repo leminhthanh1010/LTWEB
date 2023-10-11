@@ -36,12 +36,12 @@ namespace MyClass.Model
         [Required(ErrorMessage = "Ngày tạo không được để trống")]
         [Display(Name = "Ngày tạo")]
         public DateTime CreateAt { get; set; }
-        [Required(ErrorMessage = "Người cập nhật không được để trống")]
+       
         [Display(Name = "Người cập nhật")]
-        public int UpdateBy { get; set; }
-        [Required(ErrorMessage = "Ngày cập nhật không được để trống")]
+        public int? UpdateBy { get; set; }
+        
         [Display(Name = "Ngày cập nhật")]
-        public DateTime UpdateAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
         [Required(ErrorMessage = "Trạng thái không được để trống")]
         [Display(Name = "Trạng thái")]
         public int Status { get; set; }
