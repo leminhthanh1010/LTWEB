@@ -6,18 +6,20 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using LTWProject.Library;
+using MyClass.DAO;
 using MyClass.Model;
 
 namespace LTWProject.Areas.Admin.Controllers
 {
     public class SupplierController : Controller
     {
-        private MyDBContext db = new MyDBContext();
+        SuppliersDAO suppliersDAO = new SuppliersDAO();
 
         // GET: Admin/Supplier
         public ActionResult Index()
         {
-            return View(db.Suppliers.ToList());
+            return View(suppliersDAO.getList("Index"));
         }
 
         // GET: Admin/Supplier/Details/5
@@ -25,12 +27,14 @@ namespace LTWProject.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["message"] = new XMessage("danger", "Không tìm thấy nhà cung cấp");
+                return RedirectToAction("Index");
             }
-            Suppliers suppliers = db.Suppliers.Find(id);
+            Suppliers suppliers = suppliersDAO.getRow(id);
             if (suppliers == null)
             {
-                return HttpNotFound();
+                TempData["message"] = new XMessage("danger", "Không tìm thấy loại hàng");
+                return RedirectToAction("Index");
             }
             return View(suppliers);
         }
@@ -38,23 +42,42 @@ namespace LTWProject.Areas.Admin.Controllers
         // GET: Admin/Supplier/Create
         public ActionResult Create()
         {
+            ViewBag.OrderList = new SelectList(suppliersDAO.getList("Index"), "Order", "Name");
             return View();
         }
 
-        // POST: Admin/Supplier/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Image,Slug,Order,FullName,Phone,Email,MetaDesc,MetaKey,CreateBy,CreateAt,UpdateBy,UpdateAt,Status")] Suppliers suppliers)
+        public ActionResult Create( Suppliers suppliers)
         {
             if (ModelState.IsValid)
             {
-                db.Suppliers.Add(suppliers);
-                db.SaveChanges();
+                //xu ly tu dong 1 so truong
+                //----Create At
+                suppliers.CreateAt = DateTime.Now;
+                //----Create By
+                suppliers.CreateBy = Convert.ToInt32(Session["UserID"]);
+                //slug
+                suppliers.Slug = XString.Str_Slug(suppliers.Name);
+                //order
+                if (suppliers.Order == null)
+                {
+                    suppliers.Order = 1;
+                }
+                else
+                {
+                    suppliers.Order += 1;
+                }
+                //UpdateAt
+                suppliers.UpdateAt = DateTime.Now;
+                //UpdateBy 
+                suppliers.UpdateBy = Convert.ToInt32(Session["UserID"]);
+                suppliersDAO.Insert(suppliers);
+                TempData["message"] = new XMessage("success", "Thêm mới nhà cung cấp thành công");
                 return RedirectToAction("Index");
             }
-
+            ViewBag.OrderList = new SelectList(suppliersDAO.getList("Index"), "Order", "Name");
             return View(suppliers);
         }
 

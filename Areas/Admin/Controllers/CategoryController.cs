@@ -28,12 +28,12 @@ namespace LTWProject.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["message"] = new XMessage("danger", "Không tìm thấy loại hàng");
             }
             Categories categories = categoriesDAO.getRow(id);
             if (categories == null)
             {
-                return HttpNotFound();
+                TempData["message"] = new XMessage("danger", "Không tìm thấy loại hàng");
             }
             return View(categories);
         }
