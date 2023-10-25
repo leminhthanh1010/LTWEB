@@ -150,12 +150,16 @@ namespace LTWProject.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //hien thi thong bao
+                TempData["message"] = new XMessage("danger", "Xóa mẫu tin thất bại");
+                return RedirectToAction("Trash");
             }
             Categories categories = categoriesDAO.getRow(id);
             if (categories == null)
             {
-                return HttpNotFound(); 
+                //hien thi thong bao
+                TempData["message"] = new XMessage("danger", "Xóa mẫu tin thất bại");
+                return RedirectToAction("Trash");
             }
             return View(categories);
         }
@@ -167,7 +171,10 @@ namespace LTWProject.Areas.Admin.Controllers
         {
             Categories categories = categoriesDAO.getRow(id);
             categoriesDAO.Delete(categories);
-            return RedirectToAction("Index");
+            //tìm thấy mẫu tin thì tiến hành xóa
+            //hien thi thong bao
+            TempData["message"] = new XMessage("success", "Xóa mẫu tin thành công");
+            return RedirectToAction("Trash");
         }
         //// GET: Admin/Category/Status/5
         public ActionResult Status(int? id)
@@ -232,6 +239,35 @@ namespace LTWProject.Areas.Admin.Controllers
         public ActionResult Trash()
         {
             return View(categoriesDAO.getList("Trash"));
+        }
+        //// GET: Admin/Category/Undo/5
+        public ActionResult Undo(int? id)
+        {
+            if (id == null)
+            {
+                //hien thi thong bao
+                TempData["message"] = new XMessage("danger", "Phục hồi mẫu tin thất baik");
+                return RedirectToAction("Index");
+            }
+            Categories categories = categoriesDAO.getRow(id);
+            if (categories == null)
+            {
+                //hien thi thong bao
+                TempData["message"] = new XMessage("danger", "Phục hồi mẫu tin thất bại");
+                return RedirectToAction("Index");
+            }
+            //cap nhat trang thai
+            categories.Status = 2;
+            //cap nhat Update At
+            categories.UpdateAt = DateTime.Now;
+            //cap nhat Update By
+            categories.UpdateBy = Convert.ToInt32(Session["UserID"]);
+            //Update DB
+            categoriesDAO.Update(categories);
+            //hien thi thong bao
+            TempData["message"] = new XMessage("success", "Phục hồi mẫu tin thành công");
+            //tro ve trang Index
+            return RedirectToAction("Trash");//ở lại thùng rác tiếp tục Undo
         }
     }
 }
