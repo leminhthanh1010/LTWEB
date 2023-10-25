@@ -86,27 +86,44 @@ namespace LTWProject.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["message"] = new XMessage("danger", "Không tìm thấy loại hàng");
+                return RedirectToAction("Index");
             }
-            Suppliers suppliers = db.Suppliers.Find(id);
+            Suppliers suppliers = suppliersDAO.getRow(id);
             if (suppliers == null)
             {
-                return HttpNotFound();
+                TempData["message"] = new XMessage("danger", "Không tìm thấy nhà cung cấp");
+                return RedirectToAction("Index");
             }
+            ViewBag.OrderList = new SelectList(suppliersDAO.getList("Index"), "Order", "Name");
             return View(suppliers);
         }
 
-        // POST: Admin/Supplier/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Image,Slug,Order,FullName,Phone,Email,MetaDesc,MetaKey,CreateBy,CreateAt,UpdateBy,UpdateAt,Status")] Suppliers suppliers)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(suppliers).State = EntityState.Modified;
-                db.SaveChanges();
+                //xu ly tu dong 1 so truong
+                //slug
+                suppliers.Slug = XString.Str_Slug(suppliers.Name);
+                //order
+                if (suppliers.Order == null)
+                {
+                    suppliers.Order = 1;
+                }
+                else
+                {
+                    suppliers.Order += 1;
+                }
+                //UpdateAt
+                suppliers.UpdateAt = DateTime.Now;
+                //UpdateBy 
+                suppliers.UpdateBy = Convert.ToInt32(Session["UserID"]);
+                suppliersDAO.Insert(suppliers);
+                TempData["message"] = new XMessage("success", "Thêm mới nhà cung cấp thành công");
                 return RedirectToAction("Index");
             }
             return View(suppliers);
