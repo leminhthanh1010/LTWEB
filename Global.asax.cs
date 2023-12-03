@@ -21,6 +21,7 @@ namespace LTWProject
         protected void Session_Start()
         {
             Session["UserID"] = 1;
+            Session["MyCart"] = "";//khoi tao gia tri = NULL
         }
     }
 }

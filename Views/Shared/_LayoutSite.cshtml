@@ -28,13 +28,15 @@
     <!--================ Start Header Menu Area =================-->
     <header class="header_area">
         <div class="main_menu">
-            @Html.Action("MainMenu","Module")
+            @Html.Action("MainMenu", "Module")
         </div>
     </header>
     <!--================ End Header Menu Area =================-->
-
-    @RenderBody()
-
+    <!--================ BODY trỏ về trang Index =================-->
+    <main class="site-main">
+        <section class="body-content clearfix">@RenderBody()</section>
+    </main>
+    <!--================ End BODY Area =================-->
     <!--================ Start footer Area  =================-->
     <footer class="footer">
         <div class="footer-area">
@@ -52,29 +54,17 @@
                             </p>
                         </div>
                     </div>
-                    <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
-                        <div class="single-footer-widget tp_widgets">
-                            <h4 class="footer_title">Quick Links</h4>
-                            <ul class="list">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Shop</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Product</a></li>
-                                <li><a href="#">Brand</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    @Html.Action("MenuFooter", "Module")
                     <div class="col-lg-2 col-md-6 col-sm-6">
                         <div class="single-footer-widget instafeed">
                             <h4 class="footer_title">Gallery</h4>
                             <ul class="list instafeed d-flex flex-wrap">
-                                <li><img src="Public/img/gallery/r1.jpg" alt=""></li>
-                                <li><img src="Public/img/gallery/r2.jpg" alt=""></li>
-                                <li><img src="Public/img/gallery/r3.jpg" alt=""></li>
-                                <li><img src="Public/img/gallery/r5.jpg" alt=""></li>
-                                <li><img src="Public/img/gallery/r7.jpg" alt=""></li>
-                                <li><img src="Public/img/gallery/r8.jpg" alt=""></li>
+                                <li><img src="~/Public/img/gallery/r1.jpg" alt=""></li>
+                                <li><img src="~/Public/img/gallery/r2.jpg" alt=""></li>
+                                <li><img src="~/Public/img/gallery/r3.jpg" alt=""></li>
+                                <li><img src="~/Public/img/gallery/r5.jpg" alt=""></li>
+                                <li><img src="~/Public/img/gallery/r7.jpg" alt=""></li>
+                                <li><img src="~/Public/img/gallery/r8.jpg" alt=""></li>
                             </ul>
                         </div>
                     </div>
@@ -86,15 +76,14 @@
                                     <span class="fa fa-location-arrow"></span>
                                     Head Office
                                 </p>
-                                <p>123, Main Street, Your City</p>
+                                <p>69 Le Hong Phong Street, Nha Trang city</p>
 
                                 <p class="sm-head">
                                     <span class="fa fa-phone"></span>
                                     Phone Number
                                 </p>
                                 <p>
-                                    +123 456 7890 <br>
-                                    +123 456 7890
+                                    +84 123456789
                                 </p>
 
                                 <p class="sm-head">
@@ -102,8 +91,8 @@
                                     Email
                                 </p>
                                 <p>
-                                    free@infoexample.com <br>
-                                    www.infoexample.com
+                                    leminhthanh@gmail.com<br>
+                                    thanh.lm.63cntt@ntu.edu.vn
                                 </p>
                             </div>
                         </div>
@@ -112,21 +101,10 @@
             </div>
         </div>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row d-flex">
-                    <p class="col-lg-12 footer-text text-center">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-            </div>
-        </div>
+        @RenderSection("footer", required: false)
     </footer>
-    @RenderSection("footer", required: false)
     <!--================ End footer Area  =================-->
+
 </body>
 
 </html>
